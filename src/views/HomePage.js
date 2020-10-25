@@ -3,14 +3,15 @@ import IssuesComponent from '../components/IssuesComponent';
 import styled from 'styled-components'
 import { Helmet } from "react-helmet";
 import PaginationComponent from '../components/PaginationComponent';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const HomePage = () => {
 
     const [data, setData] = useState([]);
-    const OAUTH_TOKEN = '1642ca5a68e24040b60703025fc50e3a602399b3'
+    const [load, setLoad] = useState(false);
+    const OAUTH_TOKEN = '155b8beba9c626bbcb948803d629a651953812be'
+    const baseURL = 'https://api.github.com/repos/facebook/react'
     useEffect(() => {
-        const baseURL = 'https://api.github.com/repos/facebook/react'
         const info = {
             method: 'GET',
             headers: new Headers({
@@ -21,22 +22,50 @@ const HomePage = () => {
         fetch(`${baseURL}/issues?page=1&per_page=10`, info)
             .then(res => res.json())
             .then((result) => {
-                // console.log(result)
+                console.log(result);
                 setData(result)
             }).catch(error => {
                 console.log(error)
             });
-    }, [])
+    }, []);
+
+    const callback = (value) => {
+        console.log("value", value);
+        handlePageChange(value);
+    }
+
+    const handlePageChange = (value) => {
+        const info = {
+            method: 'GET',
+            headers: new Headers({
+                Authorization: `token ${OAUTH_TOKEN}`,
+            })
+        }
+        setLoad(true);
+        console.log("page", value);
+        fetch(`${baseURL}/issues?page=${value}&per_page=10`, info)
+            .then(res => res.json())
+            .then((result) => {
+                console.log(result);
+                setData(result);
+                setLoad(false);
+            }).catch(error => {
+                console.log(error);
+            })
+    }
 
     return (
         <Wrapper>
             <Helmet>
                 <body style={`background: #fafafa`} />
             </Helmet>
+            {load &&
+                <CircularProgress />
+            }
             <IssuesWrapper>
                 <IssuesComponent data={data} />
             </IssuesWrapper>
-            <PaginationComponent />
+            <PaginationComponent callback={callback} />
         </Wrapper>
     );
 

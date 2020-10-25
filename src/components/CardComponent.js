@@ -15,7 +15,6 @@ const CardComponent = (props) => {
 
     const labels = () => {
         return issue.labels.map(label => {
-            console.log("LABEEEEEEEEEL", label.name)
             return (
                 <LabelsWrapper labelColor={label.color}>
                     <Typography className={classes.label}>
