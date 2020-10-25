@@ -2,17 +2,16 @@ import React from 'react';
 import styled from 'styled-components'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { Button } from '@material-ui/core';
 import blue from '@material-ui/core/colors/blue';
 
 const CardComponent = (props) => {
 
-    const classes = useStyles();
     const issue = props.issue;
-
+    const newColor = issue.number%2 === 0 ? "#d9f2ff" : "#ffeed9";
+    const data = {color: newColor}
+    const classes = useStyles(data);
     const labels = () => {
         return issue.labels.map(label => {
             return (
@@ -25,6 +24,7 @@ const CardComponent = (props) => {
         })
     }
 
+    console.log("newColor", newColor)
     return (
         <Wrapper>
             <Card className={classes.card}>
@@ -37,9 +37,6 @@ const CardComponent = (props) => {
                     </Typography>
                     {labels()}
                 </CardContent>
-                <CardActions className={classes.button}>
-                    <Button color="primary" className={classes.button}>Mais Detalhes</Button>
-                </CardActions>
             </Card>
         </Wrapper>
     );
@@ -75,13 +72,13 @@ const useStyles = makeStyles({
     number: {
         color: 'grey',
     },
-    card: {
+    card: data => ({
         height: 250,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-around',
-        backgroundColor: '#ffffff'
-    },
+        backgroundColor: data.color
+    }),
     button: {
         color: blue.A400,
     }

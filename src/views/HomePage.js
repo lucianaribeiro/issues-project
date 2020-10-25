@@ -19,7 +19,7 @@ const HomePage = () => {
             })
         }
 
-        fetch(`${baseURL}/issues?page=1&per_page=10`, info)
+        fetch(`${baseURL}/issues?page=1&per_page=10`)
             .then(res => res.json())
             .then((result) => {
                 console.log(result);
@@ -43,7 +43,7 @@ const HomePage = () => {
         }
         setLoad(true);
         console.log("page", value);
-        fetch(`${baseURL}/issues?page=${value}&per_page=10`, info)
+        fetch(`${baseURL}/issues?page=${value}&per_page=10`)
             .then(res => res.json())
             .then((result) => {
                 console.log(result);
@@ -86,7 +86,9 @@ const IssuesWrapper = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     margin: 50px;
+    justify-content: center;
     align-content: center;
+
 `;
 
 export default HomePage;
