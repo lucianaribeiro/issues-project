@@ -9,16 +9,8 @@ const HomePage = () => {
 
     const [data, setData] = useState([]);
     const [load, setLoad] = useState(false);
-    const OAUTH_TOKEN = '155b8beba9c626bbcb948803d629a651953812be'
     const baseURL = 'https://api.github.com/repos/facebook/react'
     useEffect(() => {
-        const info = {
-            method: 'GET',
-            headers: new Headers({
-                Authorization: `token ${OAUTH_TOKEN}`,
-            })
-        }
-
         fetch(`${baseURL}/issues?page=1&per_page=10`)
             .then(res => res.json())
             .then((result) => {
@@ -35,12 +27,6 @@ const HomePage = () => {
     }
 
     const handlePageChange = (value) => {
-        const info = {
-            method: 'GET',
-            headers: new Headers({
-                Authorization: `token ${OAUTH_TOKEN}`,
-            })
-        }
         setLoad(true);
         console.log("page", value);
         fetch(`${baseURL}/issues?page=${value}&per_page=10`)
@@ -79,6 +65,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    align-content: center;
 `;
 
 const IssuesWrapper = styled.div`
@@ -86,8 +73,8 @@ const IssuesWrapper = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     margin: 50px;
-    justify-content: center;
-    align-content: center;
+    margin-left: 150px;
+    justify-content: flex-start;
 
 `;
 

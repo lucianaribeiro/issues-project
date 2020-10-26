@@ -9,8 +9,8 @@ import blue from '@material-ui/core/colors/blue';
 const CardComponent = (props) => {
 
     const issue = props.issue;
-    const newColor = issue.number%2 === 0 ? "#d9f2ff" : "#ffeed9";
-    const data = {color: newColor}
+    const newColor = issue.number % 2 === 0 ? "#d9f2ff" : "#ffeed9";
+    const data = { color: newColor }
     const classes = useStyles(data);
     const labels = () => {
         return issue.labels.map(label => {
@@ -28,14 +28,16 @@ const CardComponent = (props) => {
     return (
         <Wrapper>
             <Card className={classes.card}>
-                <CardContent>
+                <CardContent className={classes.cardContent}>
                     <Typography className={classes.number}>
                         {`#${issue.number}`}
                     </Typography>
                     <Typography className={classes.title} gutterBottom>
                         {issue.title}
                     </Typography>
-                    {labels()}
+                    <Labels>
+                        {labels()}
+                    </Labels>
                 </CardContent>
             </Card>
         </Wrapper>
@@ -47,7 +49,6 @@ const CardComponent = (props) => {
 const Wrapper = styled.div`
     width: 500px;
     margin: 10px;
-    /* display: flex; */
 `;
 
 const LabelsWrapper = styled.div`
@@ -59,6 +60,8 @@ const LabelsWrapper = styled.div`
     border-radius: 10px;
     margin-top: 10px;
 `;
+
+const Labels = styled.div``;
 
 const useStyles = makeStyles({
     title: {
@@ -72,11 +75,14 @@ const useStyles = makeStyles({
     number: {
         color: 'grey',
     },
-    card: data => ({
-        height: 250,
+    cardContent: {
+        height: 150,
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
+    },
+    card: data => ({
+        // display: 'flex',
         backgroundColor: data.color
     }),
     button: {
