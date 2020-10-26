@@ -60,7 +60,7 @@ no caso o número foi 50.
 
 ## Considerações 
 
-PS: Caso a requisição falhe no deploy é pela quantidade de vezes que a request foi feita. 
+Caso a requisição falhe no deploy é pela quantidade de vezes que a request foi feita. 
 Uma forma de corrigir é gerando um token de usuário no Github e inserindo o header na request.
 
 Exemplo de header:
@@ -68,7 +68,7 @@ Exemplo de header:
   const info = {
             method: 'GET',
             headers: new Headers({
-                Authorization: token ${OAUTH_TOKEN},
+                Authorization: `token ${OAUTH_TOKEN}`,
             })
         }
 ```
