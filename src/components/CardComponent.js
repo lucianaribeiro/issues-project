@@ -47,7 +47,7 @@ const CardComponent = (props) => {
 }
 
 const Wrapper = styled.div`
-    width: 500px;
+    width: 400px;
     margin: 10px;
 `;
 
@@ -65,18 +65,16 @@ const Labels = styled.div``;
 
 const useStyles = makeStyles({
     title: {
-        fontSize: 20,
+        fontSize: 16,
         fontWeight: 'bold',
         color: 'black'
     },
-    description: {
-        fontSize: 16,
-    },
     number: {
         color: 'grey',
+        fontSize: 12,
     },
     cardContent: {
-        height: 150,
+        height: 120,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -87,6 +85,9 @@ const useStyles = makeStyles({
     }),
     button: {
         color: blue.A400,
+    },
+    label: {
+        fontSize: 12,
     }
 })
 
