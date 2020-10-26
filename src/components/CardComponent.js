@@ -9,7 +9,7 @@ import blue from '@material-ui/core/colors/blue';
 const CardComponent = (props) => {
 
     const issue = props.issue;
-    const newColor = issue.number % 2 === 0 ? "#d9f2ff" : "#ffeed9";
+    const newColor = issue.number % 2 === 0 ? "#d9f2ff" : "#d9ffe4";
     const data = { color: newColor }
     const classes = useStyles(data);
     const labels = () => {
@@ -24,13 +24,12 @@ const CardComponent = (props) => {
         })
     }
 
-    console.log("newColor", newColor)
     return (
         <Wrapper>
             <Card className={classes.card}>
                 <CardContent className={classes.cardContent}>
                     <Typography className={classes.number}>
-                        {`#${issue.number}`}
+                        {`#${issue.number} ${issue.state}`}
                     </Typography>
                     <Typography className={classes.title} gutterBottom>
                         {issue.title}
@@ -74,7 +73,7 @@ const useStyles = makeStyles({
         fontSize: 12,
     },
     cardContent: {
-        height: 120,
+        height: 150,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -88,6 +87,11 @@ const useStyles = makeStyles({
     },
     label: {
         fontSize: 12,
+    },
+    state: {
+        color: 'black',
+        fontSize: 12,
+        fontWeight: 'bold'
     }
 })
 
