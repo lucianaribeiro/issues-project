@@ -41,16 +41,19 @@ const FilterComponent = ({ callbackFilter}) => {
     };
 
     const handleStatusChange = (event) => {
-        setStatus(event.target.value);
-        callbackFilter(event.target.value);
+        const target = event.target;
+        setStatus(target.value);
+        callbackFilter(target.value, target.name);
     }
     const handleOrderChange = (event) => {
-        setOrder(event.target.value);
-        callbackFilter(event.target.value);
+        const target = event.target;
+        setOrder(target.value);
+        callbackFilter(target.value, target.name);
     }
     const handleLabelChange = (event) => {
-        setLabel(event.target.value);
-        callbackFilter(event.target.value);
+        const target = event.target;
+        setLabel(target.value);
+        callbackFilter(target.value, target.name);
     }
 
     const handleLabels = () => {
@@ -62,10 +65,9 @@ const FilterComponent = ({ callbackFilter}) => {
             })
         }
 
-        fetch(`${baseURL}/labels`, info)
+        fetch(`${baseURL}/labels?&per_page=100`, info)
             .then((res) => res.json())
             .then((result) => {
-                console.log(result);
                 setLabels(result);
             })
     }
@@ -90,9 +92,10 @@ const FilterComponent = ({ callbackFilter}) => {
                     onClose={handleClose}
                     onOpen={handleOpen}
                     value={status}
+                    name='status'
                     onChange={handleStatusChange}
                 >
-                    <MenuItem value="">
+                    <MenuItem value="all">
                         <em>None</em>
                     </MenuItem>
                     <MenuItem value='all'>All</MenuItem>
@@ -109,13 +112,14 @@ const FilterComponent = ({ callbackFilter}) => {
                     onClose={handleClose}
                     onOpen={handleOpen}
                     value={order}
+                    name='order'
                     onChange={handleOrderChange}
                 >
                     <MenuItem value="">
                         <em>None</em>
                     </MenuItem>
-                    <MenuItem value='newer'>Newer</MenuItem>
-                    <MenuItem value='older'>Older</MenuItem>
+                    <MenuItem value='desc'>Newer</MenuItem>
+                    <MenuItem value='asc'>Older</MenuItem>
                     <MenuItem value='comments'>Most Comments</MenuItem>
                 </Select>
             </FormControl>
@@ -128,6 +132,7 @@ const FilterComponent = ({ callbackFilter}) => {
                     onClose={handleClose}
                     onOpen={handleOpen}
                     value={label}
+                    name='label'
                     onChange={handleLabelChange}
                 >
                     <MenuItem value="">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import IssuesComponent from '../components/IssuesComponent';
 import styled from 'styled-components'
 import { Helmet } from "react-helmet";
@@ -11,19 +11,42 @@ const HomePage = () => {
 
     const [data, setData] = useState([]);
     const [load, setLoad] = useState(false);
+    const [status, setStatus] = useState('all');
+    const [order, setOrder] = useState('');
+    const [comment, setComment] = useState('');
+    const [label, setLabel] = useState('');
     const baseURL = 'https://api.github.com/repos/facebook/react'
 
     useEffect(() => {
-        handlePageChange(1, 'all', '', '', '');
-    }, []);
+        console.log("chamou")
+        handlePageChange(1, status, label, order, comment);
+    }, [status, label, comment, order]);
 
     const callback = (value) => {
-        console.log("value", value);
-        handlePageChange(value, 'open', 'CLA Signed', 'desc', 'comments');
+        console.log("status", status);
+        handlePageChange(value, status, label, order, comment);
     }
 
-    const callbackFilter = (value) => {
-        console.log(value)
+    const callbackFilter = (value, name) => {
+
+        console.log('entrou')
+        if (name === 'status') {
+            setStatus(value);
+        } else if (name === 'order') {
+            if (value === 'comments') {
+                console.log("comments")
+                setComment(value);
+                setOrder('');
+            } else {
+                console.log("order")
+                setOrder(value);
+                setComment('');
+            }
+        }
+        else if (name === 'label') {
+            console.log("labels")
+            setLabel(value);
+        }
     }
 
     const handlePageChange = (value, status, label, order, comments) => {
@@ -35,7 +58,6 @@ const HomePage = () => {
             })
         }
         setLoad(true);
-        console.log("page", value);
         fetch(`${baseURL}/issues?state=${status}&labels=${label}&order=${order}&direction=${order}&sort=${comments}&page=${value}&per_page=10`, info)
             .then(res => res.json())
             .then((result) => {
@@ -69,7 +91,6 @@ const HomePage = () => {
             {handleFilter()}
             {data.length !== 0 &&
                 <DataWrapper>
-                    {console.log("data", data)}
                     <IssuesWrapper>
                         <IssuesComponent data={data} />
                     </IssuesWrapper>
@@ -88,7 +109,7 @@ const HomePage = () => {
 
 const Wrapper = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -100,7 +121,8 @@ const IssuesWrapper = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin: 20px;
+    margin-bottom: 40px;
+    margin-top: 10px;
     margin-left: 150px;
     justify-content: flex-start;
 
@@ -115,6 +137,7 @@ const DataWrapper = styled.div`
 `;
 
 const Title = styled.h1`
+    margin-top: 50px;
     font-family: 'Inconsolata', monospace;
 `;
 
