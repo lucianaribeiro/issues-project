@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import IssuesComponent from '../components/IssuesComponent';
 import styled from 'styled-components'
 import { Helmet } from "react-helmet";
