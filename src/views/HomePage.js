@@ -50,15 +50,8 @@ const HomePage = () => {
     }
 
     const handlePageChange = (value, status, label, order, comments) => {
-        const OAUTH_TOKEN = 'f67c55926842b933f4e7940324c4056a4ac87ead'
-        const info = {
-            method: 'GET',
-            headers: new Headers({
-                Authorization: `token ${OAUTH_TOKEN}`,
-            })
-        }
         setLoad(true);
-        fetch(`${baseURL}/issues?state=${status}&labels=${label}&order=${order}&direction=${order}&sort=${comments}&page=${value}&per_page=10`, info)
+        fetch(`${baseURL}/issues?state=${status}&labels=${label}&order=${order}&direction=${order}&sort=${comments}&page=${value}&per_page=10`)
             .then(res => res.json())
             .then((result) => {
                 console.log(result);
