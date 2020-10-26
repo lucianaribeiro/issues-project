@@ -37,4 +37,3 @@ To contribute follow the steps:
 2. Install dependencies: ``` $ yarn install ```
 
 3. Run the project: ``` $ yarn start ```
-4. 
