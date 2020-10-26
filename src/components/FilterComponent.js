@@ -57,15 +57,7 @@ const FilterComponent = ({ callbackFilter}) => {
     }
 
     const handleLabels = () => {
-        const OAUTH_TOKEN = '647b84baa6f7277729df53a3fc7e5ebb0c5e0e02'
-        const info = {
-            method: 'GET',
-            headers: new Headers({
-                Authorization: `token ${OAUTH_TOKEN}`,
-            })
-        }
-
-        fetch(`${baseURL}/labels?&per_page=100`, info)
+        fetch(`${baseURL}/labels?&per_page=100`)
             .then((res) => res.json())
             .then((result) => {
                 setLabels(result);
