@@ -9,7 +9,7 @@ import blue from '@material-ui/core/colors/blue';
 const CardComponent = (props) => {
 
     const issue = props.issue;
-    const newColor = issue.number % 2 === 0 ? "#d9f2ff" : "#d9ffe4";
+    const newColor = issue.number % 2 === 0 ? "#f2fbff" : "#e8faed";
     const data = { color: newColor }
     const classes = useStyles(data);
     const labels = () => {

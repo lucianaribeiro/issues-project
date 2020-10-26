@@ -5,6 +5,8 @@ const IssuesComponent = (props) => {
 
     const data = props.data;
 
+    console.log("AAAAA", props)
+
     return data.map(issue => {
         return(
             <CardComponent issue={issue}/>

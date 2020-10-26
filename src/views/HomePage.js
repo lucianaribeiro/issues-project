@@ -4,11 +4,8 @@ import styled from 'styled-components'
 import { Helmet } from "react-helmet";
 import PaginationComponent from '../components/PaginationComponent';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import { Typography } from '@material-ui/core';
+import FilterComponent from '../components/FilterComponent';
 
 const HomePage = () => {
 
@@ -23,6 +20,10 @@ const HomePage = () => {
     const callback = (value) => {
         console.log("value", value);
         handlePageChange(value, 'open', 'CLA Signed', 'desc', 'comments');
+    }
+
+    const callbackFilter = (value) => {
+        console.log(value)
     }
 
     const handlePageChange = (value, status, label, order, comments) => {
@@ -46,6 +47,12 @@ const HomePage = () => {
             })
     }
 
+    const handleFilter = () => {
+
+        return (
+            <FilterComponent callbackFilter={callbackFilter} />
+        );
+    }
 
     return (
         <Wrapper>
@@ -53,18 +60,16 @@ const HomePage = () => {
                 <body style={`background: #fafafa`} />
             </Helmet>
             <Title>Issues Project</Title>
-            <FormControl>
-                <Typography>
-
-                </Typography>
-                <InputLabel></InputLabel>
-            </FormControl>
+            <FilterTitle>
+                Filter
+            </FilterTitle>
             {load &&
                 <CircularProgress />
             }
+            {handleFilter()}
             {data.length !== 0 &&
                 <DataWrapper>
-                {console.log("data", data)}
+                    {console.log("data", data)}
                     <IssuesWrapper>
                         <IssuesComponent data={data} />
                     </IssuesWrapper>
@@ -95,7 +100,7 @@ const IssuesWrapper = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin: 50px;
+    margin: 20px;
     margin-left: 150px;
     justify-content: flex-start;
 
@@ -111,7 +116,12 @@ const DataWrapper = styled.div`
 
 const Title = styled.h1`
     font-family: 'Inconsolata', monospace;
-
 `;
+
+const FilterTitle = styled.h2`
+    font-family: 'Inconsolata', monospace;
+`;
+
+
 
 export default HomePage;
