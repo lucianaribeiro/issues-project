@@ -63,7 +63,7 @@ const HomePage = () => {
 
     return (
         <Wrapper>
-            <Title>Issues Project</Title>
+            <Title>React's Repository Issues Project</Title>
             <FilterTitle>
                 Filter
             </FilterTitle>
