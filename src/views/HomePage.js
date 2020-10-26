@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import IssuesComponent from '../components/IssuesComponent';
 import styled from 'styled-components'
-import { Helmet } from "react-helmet";
 import PaginationComponent from '../components/PaginationComponent';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Typography } from '@material-ui/core';
@@ -18,43 +17,43 @@ const HomePage = () => {
     const baseURL = 'https://api.github.com/repos/facebook/react'
 
     useEffect(() => {
-        console.log("chamou")
         handlePageChange(1, status, label, order, comment);
     }, [status, label, comment, order]);
 
     const callback = (value) => {
-        console.log("status", status);
         handlePageChange(value, status, label, order, comment);
     }
 
     const callbackFilter = (value, name) => {
 
-        console.log('entrou')
         if (name === 'status') {
             setStatus(value);
         } else if (name === 'order') {
             if (value === 'comments') {
-                console.log("comments")
                 setComment(value);
                 setOrder('');
             } else {
-                console.log("order")
                 setOrder(value);
                 setComment('');
             }
         }
         else if (name === 'label') {
-            console.log("labels")
             setLabel(value);
         }
     }
 
     const handlePageChange = (value, status, label, order, comments) => {
         setLoad(true);
-        fetch(`${baseURL}/issues?state=${status}&labels=${label}&order=${order}&direction=${order}&sort=${comments}&page=${value}&per_page=10`)
+        const OAUTH_TOKEN = '647b84baa6f7277729df53a3fc7e5ebb0c5e0e02'
+        const info = {
+            method: 'GET',
+            headers: new Headers({
+                Authorization: `token ${OAUTH_TOKEN}`,
+            })
+        }
+        fetch(`${baseURL}/issues?state=${status}&labels=${label}&order=${order}&direction=${order}&sort=${comments}&page=${value}&per_page=10`, info)
             .then(res => res.json())
             .then((result) => {
-                console.log(result);
                 setData(result);
                 setLoad(false);
             }).catch(error => {
@@ -71,9 +70,6 @@ const HomePage = () => {
 
     return (
         <Wrapper>
-            <Helmet>
-                <body style={`background: #fafafa`} />
-            </Helmet>
             <Title>Issues Project</Title>
             <FilterTitle>
                 Filter
@@ -105,9 +101,9 @@ const Wrapper = styled.div`
     height: 90vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    align-content: center;
+    /* align-content: center; */
 `;
 
 const IssuesWrapper = styled.div`

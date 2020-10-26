@@ -46,7 +46,7 @@ const CardComponent = (props) => {
 }
 
 const Wrapper = styled.div`
-    width: 400px;
+    width: 300px;
     margin: 10px;
 `;
 
@@ -64,7 +64,7 @@ const Labels = styled.div``;
 
 const useStyles = makeStyles({
     title: {
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: 'bold',
         color: 'black'
     },
@@ -86,7 +86,7 @@ const useStyles = makeStyles({
         color: blue.A400,
     },
     label: {
-        fontSize: 12,
+        fontSize: 10,
     },
     state: {
         color: 'black',

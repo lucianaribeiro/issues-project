@@ -19,7 +19,10 @@ const PaginationComponent = ({ callback }) => {
     );
 }
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+    /* margin-top: 50px; */
+    padding-bottom: 50px;
+`;
 
 
 export default PaginationComponent;

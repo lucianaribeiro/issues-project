@@ -57,11 +57,20 @@ const FilterComponent = ({ callbackFilter}) => {
     }
 
     const handleLabels = () => {
+        const OAUTH_TOKEN = '647b84baa6f7277729df53a3fc7e5ebb0c5e0e02'
+        const info = {
+            method: 'GET',
+            headers: new Headers({
+                Authorization: `token ${OAUTH_TOKEN}`,
+            })
+        }
 
-        fetch(`${baseURL}/labels?&per_page=100`)
+        fetch(`${baseURL}/labels?&per_page=100`, info)
             .then((res) => res.json())
             .then((result) => {
                 setLabels(result);
+            }).catch(error => {
+                console.log(error);
             })
     }
 
@@ -141,6 +150,9 @@ const FilterComponent = ({ callbackFilter}) => {
 const FormWrapper = styled.div`
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* margin-bottom: 50px; */
 `;
 
 const useStyles = makeStyles((theme) => ({
