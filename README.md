@@ -12,6 +12,13 @@ issues. The project features are:
 - Differentiate odd Issues from even.
 
 
+It was made using ReactJS with:
+
+- Styled Components
+- React Hooks
+- Material UI
+
+
 ## Deploy
 
 The deploy was done with Netlify and can be accessed at the following URLs:
@@ -30,3 +37,4 @@ To contribute follow the steps:
 2. Install dependencies: ``` $ yarn install ```
 
 3. Run the project: ``` $ yarn start ```
+4. 
